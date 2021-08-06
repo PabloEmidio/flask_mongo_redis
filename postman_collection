@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "af0be21b-af39-46d8-8978-ec4d690e688d",
+		"name": "tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "mongo",
+			"item": [
+				{
+					"name": "get banks mongo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/mongo/banks/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"mongo",
+								"banks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get bank mongo by code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/mongo/77/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"mongo",
+								"77",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete bank mongo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/mongo/341/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"mongo",
+								"341",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert bank mongo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"bank\": \"Banco Itau S.A\",\r\n        \"pop_name\": \"Itau\",\r\n        \"cod\": 341,\r\n        \"infos\": {\r\n            \"is_digital\": false,\r\n            \"website\": \"itau.com.br\",\r\n            \"has_investment_platform\": true\r\n        }\r\n    },\r\n    {\r\n        \"bank\": \"Caixa Econômica Federal\",\r\n        \"pop_name\": \"Caixa\",\r\n        \"cod\": 104 ,\r\n        \"infos\": {\r\n            \"is_digital\": false,\r\n            \"website\": \"caixa.gov.br\",\r\n            \"has_investment_platform\": false\r\n        }\r\n    },\r\n    {\r\n        \"bank\": \"Banco Inter S.A\",\r\n        \"pop_name\": \"Inter\",\r\n        \"cod\": 77,\r\n        \"infos\": {\r\n            \"is_digital\": true,\r\n            \"website\": \"bancointer.com.br\",\r\n            \"has_investment_platform\": true\r\n        }\r\n    },\r\n    {\r\n        \"bank\": \"Nu Pagamentos S.A\",\r\n        \"pop_name\": \"Nubank\",\r\n        \"cod\": 260,\r\n        \"infos\": {\r\n            \"is_digital\": true,\r\n            \"website\": \"nubank.com.br\",\r\n            \"has_investment_platform\": false\r\n        }\r\n    },\r\n    {\r\n        \"bank\": \"Banco Neon S.A\",\r\n        \"pop_name\": \"Neon\",\r\n        \"cod\": 735,\r\n        \"infos\": {\r\n            \"is_digital\": true,\r\n            \"website\": \"banconeon.com.br\",\r\n            \"has_investment_platform\": false\r\n        }\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/mongo/banks/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"mongo",
+								"banks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update bank mongo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pop_name\": \"Shit\",\r\n    \"infos\": {\r\n        \"website\": \"website\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/mongo/341/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"mongo",
+								"341",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "redis",
+			"item": [
+				{
+					"name": "get banks redis",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/redis/banks/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"redis",
+								"banks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get bank redis by code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/redis/104/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"redis",
+								"104",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete bank redis",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/redis/341/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"redis",
+								"341",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert bank redis",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bank\": \"Banco Itau S.A\",\r\n    \"pop_name\": \"Itau\",\r\n    \"cod\": 341,\r\n    \"infos\": {\r\n        \"is_digital\": false,\r\n        \"website\": \"itau.com.br\",\r\n        \"has_investment_platform\": true\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/redis/banks/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"redis",
+								"banks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update bank redis",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"infos\": {\r\n       \"is_digital\": true\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/redis/341/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"redis",
+								"341",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8088"
+		}
+	]
+}
