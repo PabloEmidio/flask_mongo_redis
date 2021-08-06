@@ -7,7 +7,7 @@ import redis
 config = dotenv_values('.env')
 
 class MongoDatabaseModel:
-    LOCALURI = 'mongodb://mongo/admin'
+    LOCALURI = 'mongodb://localhost/admin'
 
     def __init__(self, db_name: str='testbanks', collection: str='banks'):
         mongo_uri = config.get('mongouri') or self.LOCALURI
@@ -40,7 +40,7 @@ class MongoDatabaseModel:
         return deleted.deleted_count == 1
 
 class RedisDatabaseModel:
-        LOCALURI = 'redis'
+        LOCALURI = 'localhost'
 
         def __init__(self):
             redis_uri = config.get('redisuri') or self.LOCALURI
