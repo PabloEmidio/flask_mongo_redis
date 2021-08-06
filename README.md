@@ -18,3 +18,5 @@
 
   ```
 
+## ps: import postman_collection inside your postman application to test the routes
+
