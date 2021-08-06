@@ -1,6 +1,4 @@
-from banks.views import redisviews
 from flask import Flask
-
 
 from .views import mongoviews, redisviews, errorsviews
 
