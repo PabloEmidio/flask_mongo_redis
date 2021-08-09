@@ -31,7 +31,7 @@ def init_app(app: Flask):
                         'website': value['website'],
                         'has_investment_platform': bool(int(value['has_investment_platform']))
                     }
-        else:
+        if request.method == 'POST':
             try:
                 assert_message = 'Document must have {}'
                 bank_fields, status_code = request.json, 201
@@ -44,9 +44,9 @@ def init_app(app: Flask):
                 assert 'website' in bank_fields['infos'].keys(), assert_message.format('infos.website')
                 bank_infos = bank_fields['infos']
                 bank_infos = {
-                    'is_digital': 1 if bank_infos['is_digital'] else 0,
+                    'is_digital':int(bank_infos['is_digital']),
                     'website': bank_infos['website'],
-                    'has_investment_platform': 1 if bank_infos['has_investment_platform'] else 0
+                    'has_investment_platform': int(bank_infos['has_investment_platform'])
                 }
                 bank_fields.pop('infos')
                 database.insert(bank_fields, bank_infos)
@@ -97,7 +97,7 @@ def init_app(app: Flask):
                 if infos := bank.get('infos'):
                     if is_digital := infos.get('is_digital'):
                         assert isinstance(is_digital, bool), 'is_digital must be boolean'
-                        is_digital = 1 if is_digital else 0
+                        is_digital = int(is_digital)
                         assert database.update(
                             info_key, {'is_digital': is_digital}
                         ), update_assert_message.format('is_digital')
@@ -110,10 +110,10 @@ def init_app(app: Flask):
 
                     if hip := infos.get('has_investment_platform'):
                         assert isinstance(hip, bool), f'{hip} must be boolean'
-                        hip = 1 if hip else 0
+                        hip = int(hip)
                         assert database.update(
                             info_key, {'has_investment_platform': hip}
-                        ), update_assert_message.formaftf(f'{hip}')
+                        ), update_assert_message.format(f'{hip}')
                 print(infos)
                 return redirect(f'/redis/{cod}/')
             except AssertionError as error:
