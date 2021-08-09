@@ -9,7 +9,7 @@ services:
       - 27017:27017
     container_name: banks_mongo
     networks:
-      - redis_mongo_gunicorn
+      - banks
 
   redis:
     image: redis
@@ -19,7 +19,7 @@ services:
       - 6379:6379
     container_name: banks_redis
     networks:
-      - redis_mongo_gunicorn
+      - banks
 
 volumes:
   banks_mongo_data:
@@ -28,5 +28,5 @@ volumes:
     driver: local
 
 networks:
-  redis_mongo_gunicorn:
+  banks:
     driver: "bridge" 
