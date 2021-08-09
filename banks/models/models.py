@@ -33,11 +33,11 @@ class MongoDatabaseModel:
             updated = self.db.update_one(
                 update_which, update_set
             )
-            return updated.modified_count == 1
+            return updated.modified_count > 0
  
     def delete(self, delete_which: dict={}):
         deleted = self.db.delete_one(delete_which)
-        return deleted.deleted_count == 1
+        return deleted.deleted_count > 0
 
 class RedisDatabaseModel:
         LOCALURI = 'localhost'
