@@ -112,7 +112,7 @@ def init_app(app: Flask)  -> None:
         if request.method == 'DELETE':
             try:
                 assert database.delete({"cod": bank_cod}), ''
-                return redirect('/mongo/banks', 410)
+                return redirect('/mongo/banks/')
             except AssertionError:
                 abort(404)
             except Exception:
