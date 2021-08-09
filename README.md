@@ -4,8 +4,7 @@
 
 # How to test now
 ## Make the following steps to debug this application inside a [docker container](https://docs.docker.com/get-started/)
-  ``` 
-
+  ```sh
   [example@example]$ git clone https://github.com/PabloEmidio/flask_mongo_redis.git
 
   [example@example]$ cd flask_mongo_redis
