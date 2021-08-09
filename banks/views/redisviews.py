@@ -1,4 +1,5 @@
-from flask import Flask, redirect, jsonify, abort, request
+from flask import Flask, redirect, abort, request
+from flask_restful import Resource, Api
 from pymongo import database
 
 from banks.models.models import RedisDatabaseModel
@@ -7,17 +8,17 @@ from banks.models.sample_banks import REDIS_SAMPLE_BANKS
 database = RedisDatabaseModel()
 
 def init_app(app: Flask):
+    api = Api(app)
 
-    @app.route('/redis/')
-    def redis_add_sample_banks():
-        if not database.get_keys():
-            for i in range(0, len(REDIS_SAMPLE_BANKS), 2):
-                database.insert(REDIS_SAMPLE_BANKS[i], REDIS_SAMPLE_BANKS[i+1])
-        return redirect('/redis/banks/')
+    class RedisAddSampleBanks(Resource):
+        def get(self):
+            if not database.get_keys():
+                for i in range(0, len(REDIS_SAMPLE_BANKS), 2):
+                    database.insert(REDIS_SAMPLE_BANKS[i], REDIS_SAMPLE_BANKS[i+1])
+            return redirect('/redis/banks/')
 
-    @app.route('/redis/banks/', methods=['GET', 'POST'])
-    def redis_list_banks():
-        if request.method == 'GET':
+    class RedisListAndCreateBanks(Resource):
+        def get(self):
             values = database.get_values()
             if not values:
                 return redirect('/redis/')
@@ -31,7 +32,9 @@ def init_app(app: Flask):
                         'website': value['website'],
                         'has_investment_platform': bool(int(value['has_investment_platform']))
                     }
-        if request.method == 'POST':
+            return banks, status_code
+        
+        def post(self):
             try:
                 assert_message = 'Document must have {}'
                 bank_fields, status_code = request.json, 201
@@ -44,7 +47,7 @@ def init_app(app: Flask):
                 assert 'website' in bank_fields['infos'].keys(), assert_message.format('infos.website')
                 bank_infos = bank_fields['infos']
                 bank_infos = {
-                    'is_digital':int(bank_infos['is_digital']),
+                    'is_digital': int(bank_infos['is_digital']),
                     'website': bank_infos['website'],
                     'has_investment_platform': int(bank_infos['has_investment_platform'])
                 }
@@ -53,19 +56,18 @@ def init_app(app: Flask):
                 return redirect(f'/redis/{bank_fields["cod"]}/', 303)
             except AssertionError as error:
                 status_code = 400
-                banks = {
+                bank = {
                     'message': str(error),
                     'status_code': status_code
                 }
             except Exception as error:
                 print(error)
                 abort(500)
-        return jsonify(banks), status_code
+            return bank, status_code
 
-    @app.route('/redis/<cod>/', methods=['GET', 'DELETE', 'PUT'])
-    def redis_bank_by_cod(cod):
-        bank_key, info_key = f'banks:{cod}', f'banks:{cod}:infos'
-        if request.method == 'GET':
+    class RedisBankByCod(Resource):
+        def get(self, bank_cod):
+            bank_key, info_key = f'banks:{bank_cod}', f'banks:{bank_cod}:infos'
             try:
                 values = database.get_values(bank_key, info_key)
                 assert values[0] and values[1], ''
@@ -79,8 +81,10 @@ def init_app(app: Flask):
                 abort(404)
             except Exception:
                 abort(500)
+            return bank, 200
 
-        if request.method == 'PUT':
+        def put(self, bank_cod):
+            bank_key, info_key = f'banks:{bank_cod}', f'banks:{bank_cod}:infos'
             try:
                 update_assert_message = 'An error happened updating {}'
                 bank, status_code = request.json, 201
@@ -115,7 +119,7 @@ def init_app(app: Flask):
                             info_key, {'has_investment_platform': hip}
                         ), update_assert_message.format(f'{hip}')
                 print(infos)
-                return redirect(f'/redis/{cod}/')
+                return redirect(f'/redis/{bank_cod}/')
             except AssertionError as error:
                 status_code = 400
                 bank = {
@@ -125,8 +129,10 @@ def init_app(app: Flask):
             except Exception as error:
                 print(error)
                 abort(500)
+            return bank, status_code
 
-        if request.method == 'DELETE':
+        def delete(self, bank_cod):
+            bank_key, info_key = f'banks:{bank_cod}', f'banks:{bank_cod}:infos'
             try:
                 assert database.delete(bank_key, info_key), ''
                 return redirect('/redis/banks/')
@@ -134,5 +140,7 @@ def init_app(app: Flask):
                 abort(404)
             except Exception:
                 abort(500)
-        return bank
 
+    api.add_resource(RedisAddSampleBanks, '/redis/')
+    api.add_resource(RedisListAndCreateBanks, '/redis/banks/')
+    api.add_resource(RedisBankByCod, '/redis/<bank_cod>/')
