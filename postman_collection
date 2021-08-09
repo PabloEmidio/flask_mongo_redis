@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "af0be21b-af39-46d8-8978-ec4d690e688d",
-		"name": "tests",
+		"name": "banks_test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -72,7 +72,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"bank\": \"Banco Itau S.A\",\r\n        \"pop_name\": \"Itau\",\r\n        \"cod\": 341,\r\n        \"infos\": {\r\n            \"is_digital\": false,\r\n            \"website\": \"itau.com.br\",\r\n            \"has_investment_platform\": true\r\n        }\r\n    },\r\n    {\r\n        \"bank\": \"Caixa Econômica Federal\",\r\n        \"pop_name\": \"Caixa\",\r\n        \"cod\": 104 ,\r\n        \"infos\": {\r\n            \"is_digital\": false,\r\n            \"website\": \"caixa.gov.br\",\r\n            \"has_investment_platform\": false\r\n        }\r\n    },\r\n    {\r\n        \"bank\": \"Banco Inter S.A\",\r\n        \"pop_name\": \"Inter\",\r\n        \"cod\": 77,\r\n        \"infos\": {\r\n            \"is_digital\": true,\r\n            \"website\": \"bancointer.com.br\",\r\n            \"has_investment_platform\": true\r\n        }\r\n    },\r\n    {\r\n        \"bank\": \"Nu Pagamentos S.A\",\r\n        \"pop_name\": \"Nubank\",\r\n        \"cod\": 260,\r\n        \"infos\": {\r\n            \"is_digital\": true,\r\n            \"website\": \"nubank.com.br\",\r\n            \"has_investment_platform\": false\r\n        }\r\n    },\r\n    {\r\n        \"bank\": \"Banco Neon S.A\",\r\n        \"pop_name\": \"Neon\",\r\n        \"cod\": 735,\r\n        \"infos\": {\r\n            \"is_digital\": true,\r\n            \"website\": \"banconeon.com.br\",\r\n            \"has_investment_platform\": false\r\n        }\r\n    }\r\n]",
+							"raw": "{\r\n    \"bank\": \"Mercado Pago\",\r\n    \"pop_name\": \"Mercado Pago\",\r\n    \"cod\": 323,\r\n    \"infos\": {\r\n        \"is_digital\": true,\r\n        \"website\": \"mercadopago.com.br/\",\r\n        \"has_investment_platform\": false\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -100,7 +100,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"pop_name\": \"Shit\",\r\n    \"infos\": {\r\n        \"website\": \"website\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"pop_name\": \"axiac\",\r\n    \"infos\": {\r\n        \"website\": \"website\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -108,13 +108,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/mongo/341/",
+							"raw": "{{base_url}}/mongo/104/",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"mongo",
-								"341",
+								"104",
 								""
 							]
 						}
@@ -151,13 +151,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/redis/104/",
+							"raw": "{{base_url}}/redis/77/",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"redis",
-								"104",
+								"77",
 								""
 							]
 						}
@@ -190,7 +190,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"bank\": \"Banco Itau S.A\",\r\n    \"pop_name\": \"Itau\",\r\n    \"cod\": 341,\r\n    \"infos\": {\r\n        \"is_digital\": false,\r\n        \"website\": \"itau.com.br\",\r\n        \"has_investment_platform\": true\r\n    }\r\n}",
+							"raw": "{\r\n    \"bank\": \"Mercado Pago\",\r\n    \"pop_name\": \"Mercado Pago\",\r\n    \"cod\": 323,\r\n    \"infos\": {\r\n        \"is_digital\": true,\r\n        \"website\": \"mercadopago.com.br/\",\r\n        \"has_investment_platform\": false\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -226,13 +226,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/redis/341/",
+							"raw": "{{base_url}}/redis/104/",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"redis",
-								"341",
+								"104",
 								""
 							]
 						}
