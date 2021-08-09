@@ -103,7 +103,7 @@ def init_app(app: Flask):
                         ), update_assert_message.format('is_digital')
 
                     if website := infos.get('website'):
-                        assert isinstance(website, str), 'website must be boolean'
+                        assert isinstance(website, str), 'website must be string'
                         assert database.update(
                             info_key, {'website': website}
                         ), update_assert_message.format('website')
