@@ -46,8 +46,8 @@ class RedisDatabaseModel:
             redis_uri = config.get('redisuri') or self.LOCALURI
             self.db = redis.StrictRedis(host=redis_uri, port=6379, db=0, charset='UTF-8', decode_responses=True)
 
-        def get_keys(self, match: str='banks:*'):
-            keys = self.db.scan(0, match, count=1000)[1]
+        def get_keys(self):
+            keys = self.db.keys()
             keys.sort()
             return keys
 
