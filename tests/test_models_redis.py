@@ -17,7 +17,7 @@ def insert_example():
 def db(insert_example):
     with patch('banks.models.models.redis.StrictRedis', new=fakeredis.FakeStrictRedis):
         db = RedisDatabaseModel()
-        if not len(db.get_values()) == 0:
+        if not len(db.get_keys()) == 0:
             raise DatabaseNotVoid()
         yield db
         [db.delete(key) for key in db.get_keys()]
