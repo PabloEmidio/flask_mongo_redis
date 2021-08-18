@@ -74,7 +74,6 @@ class RedisDatabaseModel:
 
         def update(self, hash_name: str = '', bank_fields: dict[str, str]={'key': 'value'}):
             updated = self.db.hset(hash_name, mapping=bank_fields)
-            print(updated)
             return updated == 0
         
         def delete(self, bank_key: str = '', info_key: str=''):
